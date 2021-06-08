@@ -1,17 +1,38 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import reactDom from "react-dom";
+import Counter from "./components/Counter";
+import "./Css/fonts.css";
+import "./Css/counter.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+function App() {
+  let counter = 0;
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  setInterval(() => {
+    const dOne = Math.floor(counter / 1 %10),
+      dTwo = Math.floor(counter / 10 % 10),
+      dThree = Math.floor(counter / 100 % 10),
+      dFour = Math.floor(counter / 1000 % 10),
+      dFive = Math.floor(counter / 10000 % 10),
+      dSix = Math.floor(counter / 100000 % 10);
+
+    counter++;
+
+    reactDom.render(<Counter
+    one={dOne}
+    two={dTwo}
+    three={dThree}
+    four={dFour}
+    five={dFive}
+    six={dSix}
+    />, document.querySelector("#root"));
+  }, 1000);
+
+  return (
+    <>
+      <Counter />
+    </>
+  );
+}
+
+reactDom.render(<App />, document.querySelector("#root"));
